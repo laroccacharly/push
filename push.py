@@ -1,6 +1,7 @@
 import requests
 import os
 
+
 def send_notification(message: str, title: str = "my title") -> None:
     app_token = os.getenv("PUSH_APP_TOKEN")
     user_key = os.getenv("PUSH_USER_KEY")
@@ -11,10 +12,7 @@ def send_notification(message: str, title: str = "my title") -> None:
         raise ValueError("PUSH_USER_KEY is not set in the environment variables")
 
     url = "https://api.pushover.net/1/messages.json"
-    headers = {
-        "accept": "application/json",
-        "Content-Type": "application/json"
-    }
+    headers = {"accept": "application/json", "Content-Type": "application/json"}
     body = {
         "token": app_token,
         "user": user_key,
@@ -23,7 +21,3 @@ def send_notification(message: str, title: str = "my title") -> None:
     }
     response = requests.post(url, headers=headers, json=body)
     response.raise_for_status()
-
-
-if __name__ == "__main__":
-    send_notification("Hello, world!")
