@@ -1,0 +1,26 @@
+diff --git a/lib/PhysicalName.js b/lib/PhysicalName.js
+index 68b4f6201feb6256f4c4e70b730dc8fa399c025c..2cb7d564a2bc1c0915ebc98ea1c856b053c1b595 100644
+--- a/lib/PhysicalName.js
++++ b/lib/PhysicalName.js
+@@ -11,6 +11,8 @@ const TRUNCATION_HASH_LENGTH = 8;
+ export const createPhysicalName = Effect.fn(function* ({ id, prefix: _prefix, 
+ // 16 base32 characters = 80 bits of entropy = 4 × 10⁻⁷
+ instanceId, suffixLength = 16, maxLength = 64, delimiter = "-", lowercase = false, forbiddenPrefixes = [], }) {
++    // Patched: require explicit names, so alchemy deploy --adopt can find every resource.
++    return yield* Effect.die(new Error(`Resource "${id}" has no explicit name. Give it one (e.g. { name: "${id.toLowerCase()}" }), so alchemy deploy --adopt can find it.`));
+     // Always generate DNS-compatible names (letters, numbers, and hyphens only).
+     // This ensures physical names work across all services including S3 buckets.
+     const sanitize = (name) => (lowercase ? name.toLowerCase() : name).replaceAll(lowercase ? /[^a-z0-9-]/g : /[^a-zA-Z0-9-]/g, delimiter);
+diff --git a/src/PhysicalName.ts b/src/PhysicalName.ts
+index 3db6424f645fff5be3c486383b6cef4ad9d71613..4c702b693f74d7003fc3758d9da2e9cc7fa8816b 100644
+--- a/src/PhysicalName.ts
++++ b/src/PhysicalName.ts
+@@ -56,6 +56,8 @@ export const createPhysicalName = Effect.fn(function* ({
+    */
+   forbiddenPrefixes?: string[];
+ }) {
++  // Patched: require explicit names, so alchemy deploy --adopt can find every resource.
++  return yield* Effect.die(new Error(`Resource "${id}" has no explicit name. Give it one (e.g. { name: "${id.toLowerCase()}" }), so alchemy deploy --adopt can find it.`));
+   // Always generate DNS-compatible names (letters, numbers, and hyphens only).
+   // This ensures physical names work across all services including S3 buckets.
+   const sanitize = (name: string) =>

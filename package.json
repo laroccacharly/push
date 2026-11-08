@@ -1,0 +1,41 @@
+{
+  "name": "push",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "push": "./src/cli/index.ts"
+  },
+  "exports": {
+    "./client": "./client/index.ts"
+  },
+  "scripts": {
+    "push": "bun ./src/cli/index.ts",
+    "build": "bun ./src/deploy/build.ts",
+    "deploy": "bun ./src/deploy/deploy.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "lint": "ts-lint",
+    "release": "git add -A && git commit -m v$npm_package_version && git tag v$npm_package_version && git push origin main v$npm_package_version"
+  },
+  "dependencies": {
+    "@effect/platform-bun": "4.1.2",
+    "@effect/sql-d1": "4.1.2",
+    "effect": "4.1.2",
+    "effect-lib": "github:laroccacharly/effect-lib#v0.37.2"
+  },
+  "devDependencies": {
+    "@alchemy.run/cloudflare": "2.0.0-beta.85",
+    "@cloudflare/workers-types": "^5.20261108.1",
+    "@effect/platform-node": "4.1.2",
+    "@effect/sql-sqlite-bun": "4.1.2",
+    "@types/bun": "^1.4.4",
+    "alchemy": "2.0.0-beta.85",
+    "ts-lint": "github:laroccacharly/ts-lint#v0.9.0",
+    "typescript": "^7.0.2"
+  },
+  "patchedDependencies": {
+    "alchemy@2.0.0-beta.85": "patches/alchemy@2.0.0-beta.85.patch"
+  }
+}

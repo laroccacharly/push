@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#14171a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="push" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>push</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      :root { font-family: ui-rounded, -apple-system, system-ui, sans-serif; background: #14171a; color: #e8e6e1; }
+      body { margin: 0; min-height: 100dvh; display: grid; place-items: center; padding: env(safe-area-inset-top) 24px env(safe-area-inset-bottom); box-sizing: border-box; }
+      main { width: 100%; max-width: 360px; text-align: center; }
+      img { width: 88px; height: 88px; border-radius: 22px; }
+      h1 { font-size: 28px; margin: 20px 0 8px; letter-spacing: -0.02em; }
+      p { color: #a8a49c; line-height: 1.5; margin: 0 0 28px; }
+      p[data-tone="ok"] { color: #8fd18b; }
+      p[data-tone="warn"] { color: #f2c14e; }
+      button { width: 100%; padding: 16px; border: 0; border-radius: 14px; background: #f2c14e; color: #14171a; font: inherit; font-weight: 600; font-size: 17px; }
+      button:disabled { opacity: 0.5; }
+      button[hidden] { display: none; }
+      code { background: #23272b; padding: 2px 6px; border-radius: 6px; color: #e8e6e1; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/apple-touch-icon.png" alt="" />
+      <h1>push</h1>
+      <p id="status">Loading…</p>
+      <button id="enable" type="button" hidden>Enable notifications</button>
+    </main>
+    <script type="module" src="/page.js"></script>
+  </body>
+</html>
